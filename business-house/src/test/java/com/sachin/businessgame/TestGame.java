@@ -1,9 +1,6 @@
 package com.sachin.businessgame;
 
-import static org.junit.Assert.*;
-
 import java.util.Collections;
-import java.util.Scanner;
 
 import org.junit.Test;
 
@@ -36,19 +33,18 @@ public class TestGame {
 
 		// String diceRoll = scn.nextLine();
 
-		String diceRoll = "4,4,4,6,7,8,5,11,10,12,2,3,5,6,7,8,5,11,10,12,2,3,5,6,7,8,5,11,10,12";
-
-		String rolls[] = diceRoll.split(",");
+		int diceRoll[] = { 4, 4, 4, 6, 7, 8, 5, 11, 10, 12, 2, 3, 5, 6, 7, 8, 5, 11, 10, 12, 2, 3, 5, 6, 7, 8, 5, 11,
+				10, 12 };
 
 		int maxMoves = game.getMaxMoves();
 
 		int validMoves = noPlayers * maxMoves + noPlayers * (maxMoves - 1);
-		if (diceRoll.length() != validMoves) {
+		if (diceRoll.length != validMoves) {
 			// throw new IllegalArgumentException("No. of Moves should be = " +
 			// validMoves);
 		}
 
-		game.initGame(noPlayers, cellPosition, diceRoll);
+		game.initialiseGame(noPlayers, cellPosition);
 
 		int curPlayerIndex = 0;
 
@@ -58,26 +54,23 @@ public class TestGame {
 			curPlayerIndex = diceRollPosition % noPlayers;
 
 			Player currentPlayer = game.getPlayers().get(curPlayerIndex);
-			currentPlayer.updatePosition(Integer.parseInt(rolls[diceRollPosition]));
+			currentPlayer.updatePosition(diceRoll[diceRollPosition]);
 
 			if (game.getMAX_CELL_POSITION().equals(currBlockPos)) {
 				currBlockPos = 0;
 			}
 
-			CellBlock cellBlock = game.getCellBlocks().get(currBlockPos);
-			currentPlayer.updateAmount(cellBlock.getPrice());
-			
-			
-			
-			if(cellBlock instanceof HotelCellBlock)
-			{
-				
-			//	currentPlayer.addHotel(curPlayerIndex, cellBlock);
-			}
+			CellBlock cellBlock = CellBlock.getCellBlock(cell[currBlockPos]);
+			currentPlayer.updateAmount(cellBlock.getValue());
 
+			if (cell[currBlockPos].equalsIgnoreCase("H")) {
+				cellBlock = game.getHotelBlocks().get(currBlockPos);
+
+				currentPlayer.updateParameter((HotelCellBlock)cellBlock, currBlockPos);
+			}
 		}
 
-		//Collections.sort(game.getPlayers());
+		Collections.sort(game.getPlayers());
 
 		for (Player play : game.getPlayers()) {
 			System.out.println(play.toString());

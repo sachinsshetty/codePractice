@@ -1,18 +1,29 @@
 package com.sachin.businessgame;
 
-import java.util.List;
-
 public abstract class CellBlock {
 
-	public static final int HOTEL = 0;
-	public static final int EMPTY = 1;
-	public static final int JAIL = 2;
-	public static final int TREASURE = 3;
+	abstract int getValue();
 
-	abstract int getPrice();
-
-	int price;
-	boolean isSpecial;
+	int value;
+	boolean occupied = false;
 	int position;
 
+	public boolean isOccupied() {
+		return occupied;
+	}
+
+	static CellBlock getCellBlock(String type) {
+		switch (type) {
+		case "J":
+			return new JailCellBlock();
+		case "H":
+			return new HotelCellBlock();
+		case "T":
+			return new TreasureCellBlock();
+		case "E":
+			return new EmptyCellBlock();
+
+		}
+		return null;
+	}
 }
