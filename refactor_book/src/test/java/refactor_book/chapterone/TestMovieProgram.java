@@ -1,7 +1,5 @@
 package refactor_book.chapterone;
 
-import static org.junit.Assert.*;
-
 import java.util.Vector;
 
 import org.junit.Test;
@@ -40,10 +38,10 @@ public class TestMovieProgram {
 	public void singleMovieStatementTest() {
 		Movie topgun = new Movie("TopGun", Movie.NEW_RELEASE);
 		Rental rent1 = new Rental(topgun, 1);
-		
+
 		Vector rentals = new Vector<Rental>();
 		rentals.add(rent1);
-		
+
 		Customer cm = new Customer("Sachin", rentals);
 
 		StringBuilder expectedString = new StringBuilder();
@@ -51,7 +49,7 @@ public class TestMovieProgram {
 		expectedString.append("\tTopGun	3.0\n");
 		expectedString.append("Amount owed is 3.0\n");
 		expectedString.append("You earned 1 frequent renter points");
-		
+
 		Assert.assertEquals(expectedString.toString(), cm.statement());
 	}
 
@@ -59,10 +57,10 @@ public class TestMovieProgram {
 	public void singleMovieHTMLStatementTest() {
 		Movie topgun = new Movie("TopGun", Movie.NEW_RELEASE);
 		Rental rent1 = new Rental(topgun, 1);
-		
+
 		Vector rentals = new Vector<Rental>();
 		rentals.add(rent1);
-		
+
 		Customer cm = new Customer("Sachin", rentals);
 
 		StringBuilder expectedString = new StringBuilder();
@@ -70,8 +68,8 @@ public class TestMovieProgram {
 		expectedString.append("\tTopGun	3.0\n");
 		expectedString.append("<P>You owe <EM>3.0</EM><P>\n");
 		expectedString.append("On this rental you earned <EM>1</EM> frequent renter points");
-		
+
 		Assert.assertEquals(expectedString.toString(), cm.HTMLStatement());
 	}
-	
+
 }

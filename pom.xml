@@ -26,5 +26,6 @@
   <modules>
   	<module>refactor_book</module>
   	<module>hackerrank</module>
+  	<module>confmanagement</module>
   </modules>
 </project>
