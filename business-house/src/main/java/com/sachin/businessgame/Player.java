@@ -1,18 +1,20 @@
 package com.sachin.businessgame;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Player implements Comparable<Player> {
 
 	int id;
 	Map<Integer, HotelCellBlock> hotels = new HashMap<Integer, HotelCellBlock>();
-	double currentAmount = 1000;
+	double currentAmount;
 	double totalAmount;
-	int position = 0;
+	int position = -1;
 
-	public Player(int id) {
+	public Player(int id, int pLAYER_INITIAL_AMOUNT) {
 		this.id = id;
+		this.currentAmount = pLAYER_INITIAL_AMOUNT;
 	}
 
 	public void updateAmount(double price) {
@@ -33,8 +35,14 @@ public class Player implements Comparable<Player> {
 		return currentAmount + hotels.size() * 200;
 	}
 
-	public void updatePosition(int position) {
-		this.position += position;
+	public int updatePosition(int newPosition) {
+		int maxCell = 38;
+		position += newPosition;
+		if (position >= maxCell) {
+			position = 0;
+		}
+
+		return position;
 	}
 
 	@Override
@@ -54,14 +62,23 @@ public class Player implements Comparable<Player> {
 
 	}
 
-	public void updateParameter(HotelCellBlock cellBlock, int cellPosition) {
+	public void updateParameter(HotelCellBlock cellBlock, int cellPosition, List<Player> players) {
 
-		if (!cellBlock.isOccupied()) {
-			(cellBlock).setOccupied();
-			if (currentAmount > 200) {
-				currentAmount = currentAmount - 200;
-				hotels.put(cellPosition, cellBlock);
-			}
+		if (!cellBlock.isOccupied() && currentAmount >= 200) {
+
+			currentAmount = currentAmount - 200;
+			cellBlock.setOccupied();
+			cellBlock.setPlayerId(id);
+
+			hotels.put(cellPosition, cellBlock);
+
+			} else {
+			currentAmount = currentAmount - 50;
+
+			int playerId = cellBlock.getPlayerId();
+			Player hotelOwner = players.get(playerId);
+			hotelOwner.updateAmount(50);
+
 		}
 
 	}
