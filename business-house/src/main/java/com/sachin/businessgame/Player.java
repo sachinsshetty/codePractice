@@ -17,8 +17,6 @@ public class Player implements Comparable<Player> {
 
 	public void updateAmount(double price) {
 		currentAmount += price;
-
-		// System.out.println(amount);
 	}
 
 	public void addHotel(int position, CellBlock cellBlock) {

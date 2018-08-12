@@ -1,4 +1,5 @@
 package com.sachin.businessgame;
+
 class TreasureCellBlock extends CellBlock {
 
 	@Override
