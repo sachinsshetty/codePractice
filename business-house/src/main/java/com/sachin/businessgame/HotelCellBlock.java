@@ -4,13 +4,16 @@ class HotelCellBlock extends CellBlock {
 	int playerId;
 	@Override
 	int getValue() {
-		return -50;
+		return value;
 	}
 
+	public HotelCellBlock(int value)
+	{
+		this.value = value;
+	}
 	public void setPlayerId(int id)
 	{
-		playerId =id;
-		
+		playerId =id;		
 	}
 	
 	public int getPlayerId()

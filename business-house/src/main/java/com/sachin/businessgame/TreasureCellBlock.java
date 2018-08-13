@@ -4,7 +4,11 @@ class TreasureCellBlock extends CellBlock {
 
 	@Override
 	int getValue() {
-		return 200;
+		return value;
 	}
 
+	public TreasureCellBlock(int value)
+	{
+		this.value = value;
+	}
 }

@@ -4,7 +4,11 @@ class EmptyCellBlock extends CellBlock {
 
 	@Override
 	int getValue() {
-		return 0;
+		return value;
 	}
 
+	public EmptyCellBlock(int value)
+	{
+		this.value = value;
+	}
 }

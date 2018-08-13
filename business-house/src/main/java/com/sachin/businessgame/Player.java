@@ -9,22 +9,21 @@ public class Player implements Comparable<Player> {
 	int id;
 	Map<Integer, HotelCellBlock> hotels = new HashMap<Integer, HotelCellBlock>();
 	double currentAmount;
-	double totalAmount;
 	int position = -1;
-
-	public Player(int id, int pLAYER_INITIAL_AMOUNT) {
+	int hotelBuyPrice ;
+	int hotelRentPrice ;
+	int maxCell ;
+	
+	public Player(int id, int playerInitialAmount, int maxCellPosition, int hotelBuyPrice, int hotelRentPrice) {
 		this.id = id;
-		this.currentAmount = pLAYER_INITIAL_AMOUNT;
+		this.currentAmount = playerInitialAmount;
+		this.maxCell = maxCellPosition;
+		this.hotelBuyPrice = hotelBuyPrice;
+		this.hotelRentPrice = hotelRentPrice;
 	}
 
 	public void updateAmount(double price) {
 		currentAmount += price;
-	}
-
-	public void addHotel(int position, CellBlock cellBlock) {
-
-		hotels.put(position, (HotelCellBlock) cellBlock);
-
 	}
 
 	public double getCurrentAmount() {
@@ -32,11 +31,10 @@ public class Player implements Comparable<Player> {
 	}
 
 	public double getTotalAmount() {
-		return currentAmount + hotels.size() * 200;
+		return currentAmount + hotels.size() * hotelBuyPrice;
 	}
 
 	public int updatePosition(int newPosition) {
-		int maxCell = 38;
 		position += newPosition;
 		if (position >= maxCell) {
 			position = 0;
@@ -59,26 +57,28 @@ public class Player implements Comparable<Player> {
 			return -1;
 		else
 			return 1;
-
 	}
 
 	public void updateParameter(HotelCellBlock cellBlock, int cellPosition, List<Player> players) {
 
-		if (!cellBlock.isOccupied() && currentAmount >= 200) {
+		if (!cellBlock.isOccupied() && currentAmount >= hotelBuyPrice) {
 
-			currentAmount = currentAmount - 200;
+			currentAmount = currentAmount - hotelBuyPrice;
 			cellBlock.setOccupied();
 			cellBlock.setPlayerId(id);
 
 			hotels.put(cellPosition, cellBlock);
 
-			} else {
-			currentAmount = currentAmount - 50;
-
+		} else {
 			int playerId = cellBlock.getPlayerId();
-			Player hotelOwner = players.get(playerId);
-			hotelOwner.updateAmount(50);
-
+			if(playerId != this.id)
+			{
+				currentAmount = currentAmount - hotelRentPrice;
+				
+				Player hotelOwner = players.get(playerId);
+				hotelOwner.updateAmount(hotelRentPrice);
+			}
+			
 		}
 
 	}

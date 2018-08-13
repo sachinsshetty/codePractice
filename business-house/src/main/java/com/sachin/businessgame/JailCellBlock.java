@@ -3,7 +3,12 @@ class JailCellBlock extends CellBlock {
 
 	@Override
 	int getValue() {
-		return -150;
+		return value;
+	}
+	
+	public JailCellBlock(int value)
+	{
+		this.value = value;
 	}
 
 }
