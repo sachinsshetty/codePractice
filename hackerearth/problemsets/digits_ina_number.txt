@@ -1,0 +1,137 @@
+Let's say are the only digits which exists in a unique number system, so the numbers will be
+
+in ascending order .
+
+number is 1 and number of digits is 1
+
+will be
+
+and number of digits is 2
+
+will be
+
+and number of digits will be 3
+
+will be
+
+and number of digits will be 4
+
+You have to find number of digits of
+
+term in unique number system .
+
+Input :
+
+First line T contains number of testcases
+
+Next T lines contains N
+
+Output :
+
+Number of digits in
+
+number
+
+Constraints
+
+SAMPLE INPUT
+
+4
+1
+4
+14
+40
+
+SAMPLE OUTPUT
+
+1
+2
+3
+4
+
+Explanation
+
+number is 1 and number of digits is 1
+
+will be
+
+and number of digits is 2
+
+will be
+
+and number of digits will be 3
+
+will be
+
+and number of digits will be 4
+Time Limit: 1.0 sec(s) for each input file.
+Memory Limit: 256 MB
+Source Limit: 1024 KB
+Marking Scheme: Marks are awarded when all the testcases pass.
+Allowed Languages: C, C++, C++14, Clojure, C#, D, Erlang, F#, Go, Groovy, Haskell, Java, Java 8, JavaScript(Rhino), JavaScript(Node.js), Julia, Kotlin, Lisp, Lisp (SBCL), Lua, Objective-C, OCaml, Octave, Pascal, Perl, PHP, Python, Python 3, R(RScript), Racket, Ruby, Rust, Scala, Swift, Swift-4.1, Visual Basic
+
+
+-- code
+/* IMPORTANT: Multiple classes and nested static classes are supported */
+
+/*
+ * uncomment this if you want to read input.
+//imports for BufferedReader
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+//import for Scanner and other utility classes
+import java.util.*;
+*/
+import java.util.*;
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        /* Sample code to perform I/O:
+         * Use either of these methods for input
+
+        //BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String name = br.readLine();                // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+
+        //Scanner
+        Scanner s = new Scanner(System.in);
+        String name = s.nextLine();                 // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+
+        */
+
+        // Write your code here
+            
+        Scanner s = new Scanner(System.in);
+        int testCase = s.nextInt();
+        
+        ArrayList<Long> calcValue= new ArrayList<Long>();
+        
+        long j = 1000000L,i=0;
+        while(i< j)
+        {
+            i++;
+            String tmp="";
+            long k=i ,y=0;
+            while(k !=0)
+            {
+                y= k % 3 ;
+                k = (long)Math.floor(k /3);
+                tmp = tmp + y;
+            }
+            calcValue.add((long)tmp.length()); 
+       }
+        
+        for(int k=0;k< testCase;k++)
+        {
+            long tmp = s.nextLong();
+            System.out.println(calcValue.get((int)tmp));         
+        }
+        
+        
+    }
+}

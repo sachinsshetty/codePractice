@@ -1,0 +1,107 @@
+While Omar was studying for Math lectures, he found the following problem.
+Given 3 Integers , ,
+
+, count the number of common divisors which divide all of them.
+
+Can you please help Omar in solving this problem, because he usually sleeps in lectures.
+
+Input:
+
+Given an integer T, which indicates the number of test cases.
+For each test case: given 3 separated integers
+
+.
+
+Output:
+
+For each test case: print the number of common divisors which divide
+
+. Print each case in a separate line.
+
+** Constraints:**
+
+
+
+SAMPLE INPUT
+
+1
+2 4 6
+
+SAMPLE OUTPUT
+
+2
+
+Time Limit: 1.0 sec(s) for each input file.
+Memory Limit: 256 MB
+Source Limit: 1024 KB
+Marking Scheme: Marks are awarded when all the testcases pass.
+Allowed Languages: C, C++, C++14, Clojure, C#, D, Erlang, F#, Go, Groovy, Haskell, Java, Java 8, JavaScript(Rhino), JavaScript(Node.js), Julia, Kotlin, Lisp, Lisp (SBCL), Lua, Objective-C, OCaml, Octave, Pascal, Perl, PHP, Python, Python 3, R(RScript), Racket, Ruby, Rust, Scala, Swift, Swift-4.1, Visual Basic
+
+
+
+-----code
+
+import java.util.*;
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        Scanner s = new Scanner(System.in);
+        
+        int testCases = s.nextInt();
+        
+        for(int i=0;i< testCases;i++)
+        {
+            
+            long values[] = new long[3];
+            //ArrayList<Long> values =  new ArrayList<Long>(3);
+            for(int k=0;k<3;k++)
+            //values.add(s.nextLong());
+            values[k] =  s.nextLong();
+            
+            Arrays.sort(values);
+            //Collections.sort(values);
+            int count =1;
+            //for(int j=2;j< values.get(2)/2;j++)
+            //for(int j=2;j< values[2]/2;j++)
+            
+            
+            if(values[0] % 2 ==0 && values[1] %2 !=0 )
+            { System.out.println(count);
+                continue;
+            }
+            
+            if(values[1] % 2 ==0 && values[2] %2 !=0 )
+            {System.out.println(count);
+            continue;
+            }
+            
+            if(values[0] % 2 ==0 && values[2] %2 !=0 )
+            {System.out.println(count);
+            continue;
+            }
+            
+            
+            for(int j=2;j<= values[0];j = j++)
+            {
+                
+                
+              //  if(values.get(0) % j ==0  && values.get(1) % j ==0  && values.get(2) % j ==0 )
+                if(values[0] % j ==0  && values[1] % j ==0  && values[2] % j ==0 )
+                count ++;
+            }
+      /*       for(int j=3;j<= values[0];j = j+2)
+            {
+              //  if(values.get(0) % j ==0  && values.get(1) % j ==0  && values.get(2) % j ==0 )
+                if(values[0] % j ==0  && values[1] % j ==0  && values[2] % j ==0 )
+                count ++;
+            }
+            
+            
+        */    System.out.println(count);
+        }
+
+
+    }
+}
+

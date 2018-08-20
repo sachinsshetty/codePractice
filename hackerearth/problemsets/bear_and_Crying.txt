@@ -1,0 +1,109 @@
+Limak is a polar bear who often chats online with his friends. Nowadays, bears often use emoticons to express their feelings. While most emoticons are short and boring, there is one exception.
+
+Crying emoticon is made of any positive number of underscores between two semicolons. So the shortest example is ;_; but it can also be e.g. ;__; or ;_____________;.
+
+Limak sent you a message of length N consisting of underscores and semicolons. Polar bears are easily distracted so Limak could have typed some characters by mistake. You wonder how many ways there are to ignore some (maybe none) characters and obtain a crying emoticon. This number could be big so find it modulo 10^9+7.
+
+Input format:
+
+The only line contains one string consisting of N characters, denoting a message from Limak. Each character of string is either ; (semicolon) or _ (underscore).
+
+Output format:
+
+In the single line print the answer modulo 10^9+7.
+
+Constraints:
+
+1 <= N <= 10^5
+SAMPLE INPUT
+
+;;;;;__;_
+
+SAMPLE OUTPUT
+
+15
+
+Explanation
+
+For clarity, let's write Limak's message with spaces: ; ; ; ; ; _ _ ; _. Note that the last underscore can't be used because there are no semicolons on the right.
+
+Any crying emoticon must contain the last semicolon and exactly one of the first 5 semicolons. Moreover, it must contain positive number of underscores and there are 3 ways to choose them:
+1) only the first underscore
+2) only the second underscore
+3) first two underscores
+
+The answer is 5*3 = 15.
+Time Limit: 1.0 sec(s) for each input file.
+Memory Limit: 256 MB
+Source Limit: 1024 KB
+Marking Scheme: Marks are awarded when all the testcases pass.
+Allowed Languages: C, C++, C++14, Clojure, C#, D, Erlang, F#, Go, Groovy, Haskell, Java, Java 8, JavaScript(Rhino), JavaScript(Node.js), Julia, Kotlin, Lisp, Lisp (SBCL), Lua, Objective-C, OCaml, Octave, Pascal, Perl, PHP, Python, Python 3, R(RScript), Racket, Ruby, Rust, Scala, Swift, Swift-4.1, Visual Basic
+
+
+
+
+--code
+/* IMPORTANT: Multiple classes and nested static classes are supported */
+
+/*
+ * uncomment this if you want to read input.
+//imports for BufferedReader
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+//import for Scanner and other utility classes
+import java.util.*;
+*/
+
+import java.util.*;
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        /* Sample code to perform I/O:
+         * Use either of these methods for input
+
+        //BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String name = br.readLine();                // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+
+        //Scanner
+        Scanner s = new Scanner(System.in);
+        String name = s.nextLine();                 // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+
+        */
+
+        // Write your code here
+
+ //   Scanner s = new Scanner(System.in);
+ //   String line = s.nextLine();
+    	Scanner scn = new Scanner(System.in);
+		String lne  = scn.nextLine();
+		
+		int init = lne.indexOf(";");
+        
+		int end = lne.lastIndexOf(";");
+		
+		int scount=0;
+		int ucount=0;
+		for(int i=init ; i< end ;i++)
+		{
+		    if(lne.charAt(i) == '_')
+		        ucount++;
+		        
+		    if(lne.charAt(i) == ';')
+		        scount++;
+		}
+		
+	//	scount;
+		
+		//System.out.println(init + " " + end + "  " + ucount + " " + scount);
+		System.out.println(scount * 3);
+
+
+
+    }
+}
+

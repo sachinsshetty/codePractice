@@ -1,0 +1,82 @@
+Sherlock and Watson decided to play a new game which was invented by Monk recently. The game is described as:
+
+Initially, there is an empty grid consisting of N rows and M columns. In one move, a player has to select i and j such that
+and and should place a coin in cell (i,j) if the total number of coins in the row and
+
+column is zero.
+The player who is unable to make a move loses the game. Sherlock decides who should start the game after knowing the values of N and M. Sherlock always wants to win the game.
+You are given values of N and M, you have to tell Sherlock who should start the game if Sherlock is always the winner.
+
+Input Format
+
+The first line contains T denoting the number of test cases.
+Each of the next T lines consists of two space-separated integers denoting the values of N and M repectively.
+
+Output Format
+
+Print Sherlock if Sherlock starts the game and Watson if Watson starts the game.
+Answer for each test case should come in a new line.
+
+Input Constraints
+
+
+Note:
+Grid is 1-indexed and initially all the cells are empty (having no coins).
+SAMPLE INPUT
+
+2
+2 2
+1 1
+
+SAMPLE OUTPUT
+
+Watson
+Sherlock
+
+Explanation
+
+In first test case, Watson can place a coin at (1,1). Then Sherlock places a coin at (2,2).
+Now, Watson can not make a move. So, Sherlock wins the game.
+Time Limit: 1.0 sec(s) for each input file.
+Memory Limit: 256 MB
+Source Limit: 1024 KB
+Marking Scheme: Marks are awarded if any testcase passes.
+Allowed Languages: C, C++
+
+
+----------code
+
+
+// Sample code to perform I/O:
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int num;
+	cin >> num;	
+	
+	int i,j;
+	for(i=0;i<num;i++)
+	{
+	  int v1,v2;
+	  
+	  cin >> v1;
+	  cin >> v2 ;
+//	  cout << v1 << v2 << endl;
+	  if(v1 == v2 )
+	    if(v1 %2 == 0)
+	        cout << "Watson" << endl;
+	    else
+	        cout << "Sherlock" << endl;
+	 
+	 
+	 
+	  
+	}
+
+}
+
+
+

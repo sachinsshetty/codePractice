@@ -1,0 +1,134 @@
+You are in a battle field and your enemy has an army of N soldiers. Each soldier has a strength denoted by an array A. Your enemy will select some soldiers such that total strength of selected soldiers is maximum. You have a poisonous gas and you can use it on the selected soldiers as many times as you want. If the total strength is even, the poisonous gas will decrease the total strength of the selected soldiers to half of the total strength, otherwise it will not affect them. Your task is to tell if its possible to reduce the total strength to 1 or not.
+
+ 
+
+Input Format:
+
+First line contains an integer T, denoting the number of test cases.
+
+First line of each test case contains an integer N, denoting the number of soldiers.
+
+Second line of each test case contains N space-separated integers, denoting the strength of the soldiers.
+
+ 
+
+Output Format:
+
+For each test case, print Yes if its possible to reduce the total strength to 1, otherwise print No.
+
+ 
+
+Constraints:
+
+SAMPLE INPUT
+
+2
+5
+76 56 -21 76 -45
+2
+8 -4
+
+SAMPLE OUTPUT
+
+No
+Yes
+
+Explanation
+
+Test case 1: n = 5 and maximum total strength is 76 + 56 + 76 = 208. You can not reduce 208 to 1 by using the poisonous gas.
+
+Test case 2: n = 2 and maximum total strength is 8. First time when you will use the poisonous gas, total strength will reduce to 4. Second time when you will use the poisonous gas, total strength will reduce to 2. Third time when you will use the poisonous gas, total strength will reduce to 1. Therefore, the answer is Yes
+
+ Time Limit: 1.0 sec(s) for each input file.
+Memory Limit: 256 MB
+Source Limit: 1024 KB
+Marking Scheme: Marks are awarded when all the testcases pass.
+Allowed Languages: C, C++, C++14, Clojure, C#, D, Erlang, F#, Go, Groovy, Haskell, Java, Java 8, JavaScript(Rhino), JavaScript(Node.js), Julia, Kotlin, Lisp, Lisp (SBCL), Lua, Objective-C, OCaml, Octave, Pascal, Perl, PHP, Python, Python 3, R(RScript), Racket, Ruby, Rust, Scala, Swift, Swift-4.1, Visual Basic
+
+
+------------code
+
+/* IMPORTANT: Multiple classes and nested static classes are supported */
+
+/*
+ * uncomment this if you want to read input.
+//imports for BufferedReader
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+//import for Scanner and other utility classes
+import java.util.*;
+*/
+import java.util.*;
+
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        /* Sample code to perform I/O:
+         * Use either of these methods for input
+
+        //BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String name = br.readLine();                // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+
+        //Scanner
+        Scanner s = new Scanner(System.in);
+        String name = s.nextLine();                 // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+
+        */
+
+        Scanner s = new Scanner(System.in);
+        int testCases = s.nextInt();
+        
+        for(int i=0;i< testCases ;i++)
+        {
+            int noSoldr = s.nextInt();
+        //    int values[] = new int[n];
+            int sum=0,tmp;
+            for(int j=0;j< noSoldr;j++)
+            {
+                tmp = s.nextInt();
+                if(tmp>0)
+                    sum = sum +tmp;
+            }
+            
+            boolean divs= false;
+            
+            while(sum>0)
+            {
+                if(sum%2 ==0)
+                {
+                    sum =sum/2;
+                }
+                else
+                { 
+                    sum =0;
+                    divs = true;
+                }
+                
+                if(sum ==1)
+                {
+                 sum =0 ;
+                 divs = false;
+                }
+            }
+            
+            if(divs)
+                System.out.println("No");
+            else
+                System.out.println("Yes");
+            
+            
+        }
+        
+        //String name = s.nextLine();                 // Reading input from STDIN
+
+
+        // Write your code here
+
+    }
+}
+

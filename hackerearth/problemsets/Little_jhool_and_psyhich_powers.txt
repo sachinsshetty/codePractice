@@ -1,0 +1,78 @@
+Little Jhool always wanted to have some psychic powers so that he could showoff his skills, and magic to people and impress them. (Specially, his girlfriend Big Jhool!) But, in spite all his efforts, hardwork, dedication, Googling, watching youtube videos he couldn't garner any psychic abilities!
+
+He knew everyone was making fun of him, so to stop all of that - he came up with a smart plan. Anyone who came to him to know about their future, he asked them to write a binary number for him - and then, he smartly told them if the future for that person had good in store, or bad.
+
+The algorithm which Little Jhool follows is, as following:
+
+    If the binary number written by the person has six consecutive 
+
+, or
+
+    , his future is bad.
+    Otherwise, he says that their future is good.
+
+Input format:
+
+Single line contains a binary number.
+
+Output format:
+
+You need to print "Good luck!" (Without quotes, and WITH exclamation mark!) if the Jhool is going to tell them that they're going to have a good time. Else, print "Sorry, sorry!" if the person is going to be told that he'll have a hard time!
+
+Constraints:
+
+The binary number will be in string format, with the maximum length being
+
+characters.
+SAMPLE INPUT
+
+0001111110
+
+SAMPLE OUTPUT
+
+Sorry, sorry!
+
+Explanation
+
+Since the binary number given has six consecutive 1s, little Jhool tells the man that he's going to have a bad time!
+Time Limit: 2.0 sec(s) for each input file.
+Memory Limit: 256 MB
+Source Limit: 1024 KB
+Marking Scheme: Marks are awarded when all the testcases pass.
+Allowed Languages: C, C++, C++14, Clojure, C#, D, Erlang, F#, Go, Groovy, Haskell, Java, Java 8, JavaScript(Rhino), JavaScript(Node.js), Julia, Kotlin, Lisp, Lisp (SBCL), Lua, Objective-C, OCaml, Octave, Pascal, Perl, PHP, Python, Python 3, R(RScript), Racket, Ruby, Rust, Scala, Swift, Swift-4.1, Visual Basic
+
+
+
+0--code
+
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+class GFG {
+	public static void main (String[] args) {
+	
+	Scanner scn = new Scanner(System.in);
+	
+	String input = scn.nextLine();
+	int count =0;
+	int max=0;
+	for(int i=0;i< input.length() -1; i++)
+	    {
+	        if(input.charAt(i) == input.charAt(i+1))
+	        {
+	            count ++;
+	        }
+	        else{
+	            max = java.lang.Math.max(count, max);
+	            count =0;
+	        }
+	    }
+
+    max++;
+  //  System.out.println(max);
+	if(max >5)
+	System.out.println("Sorry, sorry!");
+	else
+	    System.out.println("Good luck!");
+}}
