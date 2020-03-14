@@ -1,0 +1,11 @@
+https://rules.sonarsource.com/java/tag/hibernate/RSPEC-2077
+
+https://docs.sonarqube.org/display/PLUG/Writing+Custom+Java+Rules+101
+
+https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Jenkins
+
+https://github.com/SonarSource/sonar-custom-rules-examples
+
+https://github.com/SonarSource/sonarqube
+
+https://github.com/SonarSource/sonar-java

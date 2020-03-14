@@ -1,0 +1,16 @@
+CREATE OR REPLACE PROCEDURE cleanup_drop_tablespace is
+ copy_to_temp_string varchar2(800);
+ tempTable varchar2(50);
+ CURSOR get_mod_dates IS select TABLESPACE_NAME from user_tablespaces where TABLESPACE_NAME like '%TS%';
+begin
+    OPEN get_mod_dates;
+    LOOP
+    FETCH get_mod_dates into tempTable;
+
+    copy_to_temp_string := 'DROP TABLESPACE ' || tempTable || ' INCLUDING CONTENTS AND DATAFILES';
+    execute immediate copy_to_temp_string;
+    END LOOP;
+    close get_mod_dates;
+
+end;
+/

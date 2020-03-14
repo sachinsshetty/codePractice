@@ -1,0 +1,145 @@
+Create an empty text file called, e.g. packagedeb.sh in the root of your project, just inside the src directory.
+If you do this from within Eclipse, the script is automatically copied to the bin directory. 
+Add the following lines to the file:
+
+#!/bin/sh
+
+PACKAGE_NAME="programname"
+PACKAGE_VERSION="0.3"
+SOURCE_DIR=$PWD
+TEMP_DIR="/tmp"
+
+mkdir -p $TEMP_DIR/debian/DEBIAN
+mkdir -p $TEMP_DIR/debian/lib
+mkdir -p $TEMP_DIR/debian/bin
+mkdir -p $TEMP_DIR/debian/usr/share/applications
+mkdir -p $TEMP_DIR/debian/usr/share/doc/$PACKAGE_NAME
+
+This next part of the script builds the directory hierarchy for the .deb file. Basically, we create a directory called debian (lower-case) in the temporary dir, and here we put files and directories that we would like to put on the user's system. So, if we want to install a file in /usr/share/applications, we create /tmp/debian/usr/share/applications and put a copy of the file there. In this part of the script, still only empty directories, though. We also create a directory called DEBIAN (upper-case) for meta data for the .deb package.
+
+echo "Package: $PACKAGE_NAME" > $TEMP_DIR/debian/DEBIAN/control
+echo "Version: $PACKAGE_VERSION" >> $TEMP_DIR/debian/DEBIAN/control
+cat debian/control >> $TEMP_DIR/debian/DEBIAN/control
+
+
+cp debian/programname.desktop $TEMP_DIR/debian/usr/share/applications/
+cp debian/copyright $TEMP_DIR/debian/usr/share/doc/$PACKAGE_NAME/
+
+
+cp -r ../bin/ $TEMP_DIR/debian/lib/$PACKAGE_NAME
+
+gzip -9c $TEMP_DIR/debian/lib/$PACKAGE_NAME/NEWS > $TEMP_DIR/debian/usr/share/doc/$PACKAGE_NAME/change_log.gz
+
+
+After that, I set permissions to 644 for the file, which is what the Debian system expects for icons.
+
+rm -r $TEMP_DIR/debian/lib/$PACKAGE_NAME/debian
+rm $TEMP_DIR/debian/lib/$PACKAGE_NAME/COPYING
+rm $TEMP_DIR/debian/lib/$PACKAGE_NAME/packagedeb.sh
+
+
+echo '#!/bin/sh' > $TEMP_DIR/debian/bin/programname
+echo "export CLASSPATH=$CLASSPATH:/lib/$PACKAGE_NAME" >> $TEMP_DIR/debian/bin/programname
+echo "java main/MyMainClass $1" >> $TEMP_DIR/debian/bin/programname
+chmod 755 $TEMP_DIR/debian/bin/programname
+
+
+PACKAGE_SIZE=`du -bs $TEMP_DIR/debian | cut -f 1`
+PACKAGE_SIZE=$((PACKAGE_SIZE/1024))
+echo "Installed-Size: $PACKAGE_SIZE" >> $TEMP_DIR/debian/DEBIAN/control
+
+## need to check if root is enable,  all users can acess it
+chown -R root $TEMP_DIR/debian/
+chgrp -R root $TEMP_DIR/debian/
+
+cd $TEMP_DIR/
+dpkg --build debian
+mv debian.deb $SOURCE_DIR/$PACKAGE_NAME-$PACKAGE_VERSION.deb
+rm -r $TEMP_DIR/debian
+
+
+----------------Control file
+
+control File
+
+The file named control keeps meta data for the packaging system. Package name and version are generated in my Bash script above, but the rest of the file looks like this:
+
+Section: sound
+Priority: optional
+Architecture: all
+Maintainer: Thomas Pryds <my@email.address>
+Description: Short description.
+ Longer description that may span multiple
+ lines. Indent with a space.
+ .
+ Even multiple paragraphs. Just remember that empty
+ lines should contain a period and nothing else
+ (except the space).
+Depends: openjdk-8-jre | openjdk-7-jre | openjdk-6-jre | oracle-java8-installer | oracle-java7-installer | oracle-java6-installer
+Homepage: http://a.web.page/presenting/theprogram/
+
+
+
+
+----------------
+
+control File
+
+The file named control keeps meta data for the packaging system. Package name and version are generated in my Bash script above, but the rest of the file looks like this:
+
+Section: sound
+Priority: optional
+Architecture: all
+Maintainer: Thomas Pryds <my@email.address>
+Description: Short description.
+ Longer description that may span multiple
+ lines. Indent with a space.
+ .
+ Even multiple paragraphs. Just remember that empty
+ lines should contain a period and nothing else
+ (except the space).
+Depends: openjdk-8-jre | openjdk-7-jre | openjdk-6-jre | oracle-java8-installer | oracle-java7-installer | oracle-java6-installer
+Homepage: http://a.web.page/presenting/theprogram/
+
+
+.desktop file 
+control File
+
+The file named control keeps meta data for the packaging system. Package name and version are generated in my Bash script above, but the rest of the file looks like this:
+
+Section: sound
+Priority: optional
+Architecture: all
+Maintainer: Thomas Pryds <my@email.address>
+Description: Short description.
+ Longer description that may span multiple
+ lines. Indent with a space.
+ .
+ Even multiple paragraphs. Just remember that empty
+ lines should contain a period and nothing else
+ (except the space).
+Depends: openjdk-8-jre | openjdk-7-jre | openjdk-6-jre | oracle-java8-installer | oracle-java7-installer | oracle-java6-installer
+Homepage: http://a.web.page/presenting/theprogram/
+
+
+
+sh build_deb.sh
+
+dpkg -i myprogram.deb 
+
+
+
+
+To check for errors :
+sudo apt-get install lintian. 
+lintian -i packagename.deb | gedit & 
+
+
+
+source :: 
+http://blog.pryds.eu/2013/02/package-java-apps-for-ubuntu-and-debian.html
+
+
+
+
+w

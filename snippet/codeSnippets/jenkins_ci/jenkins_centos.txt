@@ -1,0 +1,12 @@
+1.Adding jenkins to repo
+    wget -O /etc/yum.repos.d/jenkins.repo   http://jenkins-ci.org/redhat/jenkins.repo
+    rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+ 
+2.Install jenkins
+    yum install jenkins
+
+3.To start service
+    /etc/init.d/jenkins start
+
+4. To get initial password
+  cat /var/lib/jenkins/secrets/initialAdminPassword

@@ -1,0 +1,8 @@
+
+sudo apt-get install automake libtool
+
+git clone --recursive https://github.com/caffe2/caffe2.git
+
+cd caffe2
+./scripts/build_android.sh
+

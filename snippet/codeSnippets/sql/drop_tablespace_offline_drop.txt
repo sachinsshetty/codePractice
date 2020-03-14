@@ -1,0 +1,3 @@
+--Drop tablespaces offline 
+
+alter database datafile '/home/user/tablepspace_01.dat' offline drop;
